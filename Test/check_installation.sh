@@ -5,7 +5,7 @@
  # @Github       : https://github.com/jsmjsm
  # @Date         : 2021-07-11 21:42:27
  # @LastEditors  : jsmjsm
- # @LastEditTime : 2021-07-11 21:47:59
+ # @LastEditTime : 2021-07-11 22:07:52
  # @FilePath     : /mac-setup/Test/check_installation.sh
 ###
 
