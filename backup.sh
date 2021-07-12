@@ -31,11 +31,13 @@ backup_formula(){
     # cat $DIR/formula.list
 }
 
+# > Backup to Github
 backup_to_github(){
     msg='Backup on: '`date`
-    echo $msg
+    # echo $msg
     git add $DIR
-    git commit -m $msg
+    git commit -m "$msg"
+    git push
 }
 
 # >>  主程序
@@ -47,8 +49,11 @@ if [ ! -d backup  ];then
 else
   DIR=`pwd`/backup
 fi
+
+# 运行
 install_homebrew
 backup_cask
 backup_formula
 backup_to_github
+
 exit 0

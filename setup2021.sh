@@ -29,16 +29,16 @@ cat << -EOF
 # type 0 -> formula
 # type 1 -> cask
 type=0
-WD=`pwd`
+WD=`pwd`/backup
 
 # > Install Homebrew
-install_homebrew(){
+install_homebrew (){
     if `command -v brew > /dev/null 2>&1`; then
         echo '👌 Homebrew 已安装'
     else
-        echo '🍺 正在安装 Homebrew... (link to Homebrew: https://brew.sh/)'
+        echo '🍺 正在安装 Homebrew...  (link to Homebrew: https://brew.sh/)'
         # install script:
-        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        /usr/bin/ruby -e "$ (curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
         if [ $? -ne 0 ]; then
             echo '🍻 Homebrew 安装成功'
         else
@@ -48,7 +48,7 @@ install_homebrew(){
 }
 
 # > Change to diffrent Homebrew source
-select_homebrew_mirror(){
+select_homebrew_mirror (){
     flag=0;
     while [ "$flag" != 1 ]
     do
@@ -86,29 +86,29 @@ select_homebrew_mirror(){
     done
 }
 
-_change_homebrew_default(){
+_change_homebrew_default (){
     echo "Changing the homebrew mirror to: Deafult ..."
-    git -C "$(brew --repo homebrew/core)" remote set-url origin https://github.com/Homebrew/homebrew-core.git
-    git -C "$(brew --repo homebrew/cask)" remote set-url origin https://github.com/Homebrew/homebrew-cask.git
+    git -C "$ (brew --repo homebrew/core)" remote set-url origin https://github.com/Homebrew/homebrew-core.git
+    git -C "$ (brew --repo homebrew/cask)" remote set-url origin https://github.com/Homebrew/homebrew-cask.git
     echo "Change Finifh! Run 'brew update' now. "
     brew update
 }
 
-_change_homebrew_tuna(){
-    echo "Changing the homebrew mirror to: Tuna（清华大学 Tuna 源） ..."
-    echo "Reference from (参考): https://mirror.tuna.tsinghua.edu.cn/help/homebrew/ "
-    git -C "$(brew --repo homebrew/core)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
-    git -C "$(brew --repo homebrew/cask)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask.git
+_change_homebrew_tuna (){
+    echo "Changing the homebrew mirror to: Tuna (清华大学 Tuna 源)  ..."
+    echo "Reference from  (参考): https://mirror.tuna.tsinghua.edu.cn/help/homebrew/ "
+    git -C "$ (brew --repo homebrew/core)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
+    git -C "$ (brew --repo homebrew/cask)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask.git
     echo "Change Finifh! Run 'brew update' now. "
     brew update
 }
 
-_change_homebrew_ustc(){
-    echo "Changing the homebrew mirror to: USTC（USTC 中科大源） ..."
-    echo "Reference from (参考): https://lug.ustc.edu.cn/wiki/mirrors/help/brew.git "
-    cd "$(brew --repo)"
+_change_homebrew_ustc (){
+    echo "Changing the homebrew mirror to: USTC (USTC 中科大源)  ..."
+    echo "Reference from  (参考): https://lug.ustc.edu.cn/wiki/mirrors/help/brew.git "
+    cd "$ (brew --repo)"
     git remote set-url origin https://mirrors.ustc.edu.cn/brew.git
-    cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
+    cd "$ (brew --repo)/Library/Taps/homebrew/homebrew-core"
     git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git
     echo "Change Finifh! Run 'brew update' now. "
     brew update
@@ -116,7 +116,7 @@ _change_homebrew_ustc(){
 
 # > Install List
 
-list_install(){
+list_install (){
     # echo "Debug: list install Begin"
     for app in `cat $1`
     do
@@ -126,7 +126,7 @@ list_install(){
 }
 
 # > Install Package
-install() {
+install () {
     # echo "Debug: install Begin"
     check_installation $1
     if [[ $? -eq 0 ]]; then
@@ -146,7 +146,7 @@ install() {
 }
 
 # > Installed Package Checking
-check_installation(){
+check_installation (){
     # if [[ $type == "cli" ]]; then
     brew list -1 | grep $1 > /dev/null
 
@@ -160,9 +160,9 @@ check_installation(){
 
 # > show menu
 # TODO: update the menu
-show_menu() {
+show_menu () {
     echo
-    read -p "✨ 请选择要安装的软件包类型: [0] 命令行 [1] 图形化(默认): " ans
+    read -p "✨ 请选择要安装的软件包类型: [0] 命令行 [1] 图形化 (默认): " ans
     echo
 
     case $ans in
@@ -173,12 +173,10 @@ show_menu() {
         *) cd $WD && cat cask.list && type=1
         ;;
     esac
-
-    echo
 }
 
 # 检查AWK是否可用
-check_awk() {
+check_awk () {
   if ! `command -v awk > /dev/null`; then
     echo 未检测到AWK，请先安装AWK再执行本程序...
     exit 127
@@ -191,7 +189,7 @@ echo
 echo "🙏  请花 5 秒时间看一下上述注意事项"
 sleep 5s
 install_homebrew
-echo '🪞 假如你处于中国大陆境内，网络环境不佳，可以尝试使用 Homebrew 国内镜像源（脚本结束后可以切换回官方源）'
+echo '🪞 假如你处于中国大陆境内，网络环境不佳，可以尝试使用 Homebrew 国内镜像源 (脚本结束后可以切换回官方源) '
 select_homebrew_mirror
 while : ; do
     show_menu
@@ -207,6 +205,7 @@ while : ; do
         ;;
     esac
 
+    echo
     read  -p "📕 是否继续查看菜单列表，Y/y继续，N/n退出 : " ans
     case $ans in
         Y|y) :
@@ -215,8 +214,9 @@ while : ; do
         ;;
     esac
 done
+
 echo '🪞 脚本运行结束前，你可以再次选取 Homebrew 的镜像源'
 select_homebrew_mirror
-echo '🤔 查看 package 信息（用于配置环境变量）: 运行 $brew info [模块名]'
+echo '🤔 查看 package 信息 (用于配置环境变量): 运行 $brew info [模块名]'
 echo '🎉 享受你的新 Mac 吧！'
-exit
+exit 0
