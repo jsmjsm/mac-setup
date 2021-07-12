@@ -22,7 +22,10 @@ functions:
 - [x] 2. change the brew source (no need for myself)
 - [x] 3. check installation
 - [x] 4. using brew to install
-- [ ] 5. show menu
-- [ ] 6. check awk
-- [ ] 7. get_package_name
-- [ ] 8. locate
+- [x] 5. show menu
+- [x] 6. check awk
+- [x] 7. get_package_name
+- [x] 8. locate
+- [ ] 9. Create Backup
+- [ ] 10. Daily Backup
+- [ ] 11. Restore from backup

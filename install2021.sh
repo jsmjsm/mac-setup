@@ -1,4 +1,13 @@
 #! /bin/bash
+###
+ # @Description  :
+ # @Author       : jsmjsm
+ # @Github       : https://github.com/jsmjsm
+ # @Date         : 2021-07-11 21:09:39
+ # @LastEditors  : jsmjsm
+ # @LastEditTime : 2021-07-12 20:52:06
+ # @FilePath     : /mac-setup/install2021.sh
+###
 
 cat << -EOF
 #######################################################################
